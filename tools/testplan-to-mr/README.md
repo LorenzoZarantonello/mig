@@ -30,6 +30,11 @@ docker build -t testplan-to-mr .
 </details>
 
 ### Execute testplan-to-mr
+Before executing the docker image, you need to rename it. You can use the next command to perform this operation.
+
+```bash
+sudo docker tag ghcr.io/stfbk/mig-testplan-to-mr:master testplan-to-mr:latest
+```
 
 To execute the docker image you can use this command:
 
