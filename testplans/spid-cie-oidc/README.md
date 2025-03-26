@@ -9,24 +9,44 @@
 
 This repository contains a *csv* file titled `testplancsv` that encompasses all tests in a human readable format, covering SPID/CIE OIDC. In order to make the dataset more comprehensible and user-friendly, we have included a clear explanation of each column:
 
-- UID: distinctive value assigned to Uniquely Identify each record in the dataset, as `entity_under_test-message_under_test-caracteristic`. It is used as a name for each test.
-- Input to test: describes the message or the token that must be analyzed and, if needed, its peculiarities.
-- Input to Entity Under Test: information, parameters, or specific details serving as inputs for the testing process.
-- Output: records the result, data or information expected by the execution of the test.
-- [Pattern name](#pattern-name): contains names categorizing different recognized structures. More details in the later section.
-- Message Under test: the message of the protocol affected by the test.
-- Test Name: contains a descriptive name of the test.
-- Description: aims to explain how the test must be accomplished.
-- Entity under test: the entity undergoing evaluation. It can be either Relying Party (RP), OpenID Provider (OP), Trust Anchor (TA), Federation Authority (SA), Attribute Authority (AA) or a mixture of them.
-- Requirement: outlines the specific needs, criteria or conditions for a successful compliance. This field essentially describes the reason why the test is done. This field is useful for both understanding why a test is done and for being used as a starting point for the implementation of the tests that are not present in the sources already gathered.
-- Requirement Source: specifies documents, standards, or guidelines used to define the requirement.
-- Profile: specify the OIDC profile considered. It can be either OIDC Core or OIDC Federation.
-- Reference OAuch: contains the references associated with [OAuch](https://oauch.io/Tests)
-- Reference OpenID Connect Conformance Profiles v3.0: contains the references associated with [OpenID Connect Conformance Profiles v3.0](https://gitlab.com/openid/conformance-suite/-/tree/master/src/main/java/net/openid/conformance/openid)
-- Notes: provides additional information, context or background to enhance the comprehension.
-- Comments: contains textual annotations or remarks.
+- *UID*: distinctive value assigned to Uniquely Identify each record in the dataset, as `entity_under_test-message_under_test-caracteristic`. It is used as a name for each test.
+- *Input to test*:  describes the message or the token that must be analyzed and, if needed, its peculiarities.
+- *Input to Entity Under Test*: information, parameters, or specific details serving as inputs for the testing process.
+- *Output*: records the result, data or information expected by the execution of the test.
+- *Pattern name*: contains names categorizing different recognized structures. More details in the later section.
+- [*Type*](#type): referred to the previous column, specifies if the pattern name is defined as "Correct input" or "Wrong input"
+- *Message Under Test*: the message of the protocol affected by the test.
+- *Test name*: contains a descriptive name of the test.
+- *Description*: aims to explain how the test must be accomplished.
+- *Entity under test*: the entity undergoing evaluation. It can be either Relying Party (RP), OpenID Provider (OP), Trust Anchor (TA), Federation Authority (SA),       Attribute Authority (AA) or a mixture of them.
+- *Input for generated MR: message to handle / Input for generated MR: Oracle*: Contains the sorted variables to populate the JSON file. The first is used for          intercept operations, and the second is used for validation
+- *Requirement*: outlines the specific needs, criteria or conditions for a successful compliance. This field essentially describes the reason why the test is           done. This field is useful for both understanding why a test is done and for being used as a starting point for the implementation of the tests that are not       present in the sources already gathered.
+- *Requirement source*: specifies documents, standards, or guidelines used to define the requirement.
+- *Profile*: specify the OIDC profile considered. It can be either OIDC Core or OIDC Federation.
+- *Cases*:
+	- IT: Spid-cie-oidc Italia
+	- FED: OIDC federation
+- *Related to*: specifies a preliminary test whose result strongly affects the outcome of the test under consideration (e.g., the test "ALL-Entity Configuration       response-HEAD-federation_metadata-presence" (row 2) affects the test "ALL-Entity Configuration response-HEAD-federation_metadata-value" (row 5))
+- *Type MIG*: specifies if the test is active or passive. Both of these options are defined as following:
+	- Passive: analyzes the intercepted HTTP messages statically, without any 	interaction (saving a value of a parameter) or modification of the HTTP 	messages         during the execution of the session
+	- Active: allows for interactions during the execution of the session
+- *Severity*: specifies the importance of a test using the following keys:
+	- L: low
+	- M: medium
+  - H: high
+- *Reasons for chosen severity*: explains in detail the motivation behind the choice of the specific severity degree for a specific test 
+- *Reference OAuch*: contains the references associated with [OAuch](https://oauch.io/Tests)
+- *Reference OpenID Connect Conformance Profiles v3.0*: contains the references associated with [OpenID Connect Conformance Profiles v3.0]                              (https://gitlab.com/openid/conformance-suite/-/tree/master/src/main/java/net/openid/conformance/openid)
+- *Reference spid-cie-oidc-django unit test*: contains the references associated with spid-cie-django unit test
+- *Reference Test MIG for CIE Core Web*: contains the references associated with Test MIG for CIE Core Web
+- *Reference IPZS Test plan document*: contains the references associated with IPZS Test plan document
+- *Reference spid-oidc-check-op*: contains the references associated with spid-oidc-check-op
+- *Notes*: provides additional information, context or background to enhance the comprehension.
+- *Checked*: 
+- *Implementation dependent*: specifies if the code generated for the test depends on the implementation (e.g., spid-oidc-cie-django)
+- *Session in spid-oidc-cie-django*: specifies the session used to execute the test
 
-### Pattern name
+### Type
 
 This column assists in cataloging and distinguishing various recognized recurring structures or formats. It has been divided in [Correct Input](#correct-input) and [Wrong input](#wrong-input), depending on the expected result.
 
