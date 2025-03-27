@@ -1,0 +1,74 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the Entity Statement's JWT payload contain a correct 'iss' claim",
+        "description": "In this test, an issued Trust Mark must be taken, decrypted and the value of the iss claim has to be an URL",
+        "type": "active",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "session": "session0",
+            "action": "start"
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Entity Configuration response SA",
+            "decode operations": [
+              {
+                "from": "body",
+                "decode param": "[^\\r\\n]*",
+                "type": "jwt",
+                "edits": [
+                  {
+                    "jwt from": "payload",
+                    "jwt save": "iss",
+                    "as": "valid_iss"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Entity Statement response SA AA",
+            "decode operations": [
+              {
+                "from": "body",
+                "decode param": "[^\\r\\n]*",
+                "type": "jwt",
+                "decode operations": [
+                  {
+                    "from": "jwt payload",
+                    "type": "jwt",
+                    "decode param": "$.trust_marks[0].trust_mark",
+                    "checks": [
+                      {
+                        "use variable": "true",
+                        "in": "payload",
+                        "check": "iss",
+                        "contains": "valid_iss"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result": "correct flow session0"
+      }
+    }
+  ]
+}

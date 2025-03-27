@@ -1,0 +1,64 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the OP refuse Authentication Requests without the scope parameter",
+        "description": "An Authentication Request is sent without the scope parameter in JWT and the response is analyzed",
+        "type": "active",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "session": "session0",
+            "action": "start"
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Authentication request",
+            "decode operations": [
+              {
+                "from": "url",
+                "decode param": "request",
+                "type": "jwt",
+                "edits": [
+                  {
+                    "jwt from": "payload",
+                    "jwt remove": "$.scope"
+                  },
+                  {
+                    "jwt sign": "X_key_RP"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Authentication error response",
+            "checks": [
+              {
+                "in": "head",
+                "check regex": "HTTP/?\\d?\\.?\\d?\\s302"
+              },
+              {
+                "in": "head",
+                "check": "invalid_request"
+              }
+            ]
+          }
+        ],
+        "result": "assert_only"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the Introspection Endpoint Response have the correct value scope parameter",
+        "description": "To test that the Introspection response of the OP's correctly answers to valid tokens, a valid one is sent and the response is analyzed. It must be Uniquely Identifier of the OP",
+        "type": "active",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "session": "session0",
+            "action": "start"
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Authentication request",
+            "message operations": [
+              {
+                "from": "url",
+                "save": "scope",
+                "as": "saved_scope"
+              }
+            ]
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Introspection response",
+            "checks": [
+              {
+                "use variable": "true",
+                "in": "body",
+                "check": "scope",
+                "is": "saved_scope"
+              }
+            ]
+          }
+        ],
+        "result": "correct flow session0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the SA correctly sign the Trust marks",
+        "description": "To accomplish this test, an entity statement issued by the SA is taken, and the trust marks in it are taken. The three parts of the JWT (header, payload and signature) composing the trust marks are base64url decoded. Finally, the signature is validated passing the public key (n, e of jwks parameter), the JWS Signature (received signature base64url decoded) and the JWS signing input (header and payload base64url encoded and concatenated with a dot dividing them) to a signature verifier.",
+        "type": "passive",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "message type": "Entity Statement response TA RP",
+            "decode operations": [
+              {
+                "from": "body",
+                "decode param": "[^\\r\\n]*",
+                "type": "jwt",
+                "decode operations": [
+                  {
+                    "from": "jwt payload",
+                    "type": "jwt",
+                    "decode param": "$.trust_marks[0].trust_mark",
+                    "jwt check sig": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDYNJ4LYJjZ/8vl\nzep5s2fvoBXMFNHseju7DXUrgoVqGNI0bQDvUs3mHK0IwWxOqPXuezZEQLkL8AnF\nHq5HK7OSaheVrZJPhijDltpp0YUJCsli5OqigvjTWU7EsipBAU+sDCS2oxN6cFlb\nEsvxN0llTh9wquDtpxnrEfrFwuw4YT/ZQY7lJkTOKFfy1rqj68fgWGlRtT3GY8/d\nIPyMAg0HHtZdLVE9yFc/9ScMUbzug2jhUl5B/VS6LN4K7b9aaZJSuITrr3DzcHcz\nL3iP5JTXNEgIndYdWVniVZ0SCa/fCqZoNAaG810AN7oFqwnH3532xtgW3MH3zINC\nldLrBJ55AgMBAAECggEADrmwTsOqsj5TAgXYttoNqPgIRAWu/oicuAxRZkAJG8Ux\nAlN72tD5Wqp27PLvkE2MFbNCnbqixjnFEJRN9/71lHIXxSDOdEG472+/OuUDei6U\nsZQE/w7yKSlOAH7Gx49yGhyBntOgjst6hB9vNuPP4rYQoh9uGzTKwreCX76U6on+\nj+8pbHV0qUe1I/e6odzP1hdTDQknbsdq6wkm8uf9y3+o8gqYPh8hBsBu8txlkMDz\nrp+Ropbd724J0MTFvXB5vLoUKKQ/XhHG8Rm/KcQLZ3ZudDoIDvjlPZTovECmZPzk\nV28c7BKVoGxa84br7gdyfEUFoN3LYIXhfCrrpzanmQKBgQD9KokwL6L5B9WF2OaE\ndFKtpyJr17ZZpPsHHXyWrrr60LjyBtCiUwgj6QKZ1ZOC+RllIpPRtLOAczm+53lW\nr9d5Ewtd2wlko/pTA/lVqLXYpt/+5M3nvgjVi7lhmQ8bufa96yWDVHNPpCMGlEnD\nD/xwI5jHv3M9340LSVNaPNejiwKBgQDaoCscxmp6cM0BAvhj4pf4/7MjJe15kqTQ\nxmIB1nTAqcEacxxXDqqvTCCWtMAVR1SESR9MxDn+IK93NYWERndZwlBOEcuaKP4O\nLe7jly+5Knc61TAnHfJJGZQMDjNAhbNpDgettT884byklXNij2i8VBdnYvBTt3S8\ny1TJ6D62iwKBgQCqG966pgeX1Y+/tBKQhajYTilu1S8N5TFXgpSomxfAWGctGS8v\nIyOhHXxF6aCIrOBHeIhirEzAzqvKfralbNoX3JgSpI8XNKeLCGyNBiPKQ7bXCt7g\nDGzbMFuMHNBuDPKiglJegGxK4zs1vIYjr6Yro3+RGC9TL9cR8l8zjxZGKQKBgQCw\nYTIHCAjVeXXbEBNnOmNTTq+udqXtRCLWEIb3ZpZQ7WNOPHorvjh0Lp3IGFEzmZWV\nGA05eMI0xRfqu/JY8iTN9JenNHInkFTPCb3GPa4R3DHO9DniBSX4Vbt8MmSk9Hj3\nE4ucWDKJorD3s18gsARWlB1Bmq+7SrHSstRYBJe72wKBgA+AH+qsu+1PVE8dEr4g\nZ2GLgBHz51JgTEiwJJyue1PuuRgizx8dIbBr+cEMdysr4iOGsmyv2+Lriw0ZJz4p\naCR/4F/LndebsDUnXFserYdKacKvUbvbHTJLHPSOuSXGhZIBx0ZulUnCSCDai8LM\nIWWt+s2IFsqvbxG/78XVrsvu\n-----END PRIVATE KEY-----\n"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "result": "correct flow session0"
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the entity correctly sign the Entity Statement",
+        "description": "To accomplish this test, the Entity Statement of the interested entity is taken and the three parts of the JWT (header, payload and signature) are base64url decoded. Finally, the signature is validated passing the public key (n, e of jwks parameter that must be taken from the Entity Statement of a superior), the JWS Signature (received signature base64url decoded) and the JWS signing input (header and payload base64url encoded and concatenated with a dot dividing them) to a signature verifier configured for the algorithm described in the Entity Statement Header",
+        "type": "passive",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "message type": "Entity Statement response SA OP",
+            "decode operations": [
+              {
+                "from": "body",
+                "decode regex": "[^\\r\\n]*",
+                "type": "jwt",
+                "jwt check sig": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC2DdoT193qW1fM\n2uKb/gIYphZ8Leepz+2/heNrDjvcJyt+KoPN5Mod9F9u9upvUPCYjh+8I6LnURVy\nYoudOHNfKcBSnJS+zC8vz+7OANY7VFKYEbUvRET4KQqKHiR5eHWS72E2zX9X7zZ0\nrmgs5H5UkueFkKpOFHgcfpOouONautd+wdVG9q4mKVfoXEZvkkWhzbtXHF0fZzo/\nZIcL3C4Hy2d8bs5KtIPWDaHuVNdsh+bvxrSinrt3+O6nOSgqgJObORHbO/BNVUN3\n32+QMtjZZeZvyEjAbp1BldiWSGoBgrNO5NnS2NWHQ6up8PFi0sffBDPNok5F7Bli\novIHT0/zAgMBAAECggEAQjX5eTwKJoDABu4YenlAE+zbwqADYBwSMJSmKDpOBPxt\n8f3OX+R0qb5Fsxq0GnYKesE9w3QGfDBeJ3K1qiFsvFB39NOjuVyTUMVD6cIeKAe7\n3jiad61RlBuBDMh3pYHs6NqMtZy5UqbaXEdN9f3IAERJVadOeQUyxdI3K6bKcSVj\nuA+J/pKm2x+HOdKDSz9wRF9rsHQUIaUafcmlERohdhTU/f4VBvPjifgUswwlWoQN\nP+DN1JNgtOoCD2qdmi4wwZJvMolQXuTGLEhQwmpV5UiskhpGY43NcnjZqhfYcjSp\njGegBxdNPUPa/WUgf7bzn/BU9yFWo4rJyTvoEMKjqQKBgQDfiRYFeLMKNOrlBrU+\n6MAlw0z40JsxyzdA9OHRBW56lkQ3UHSDyC1F4TAt9e377sPc38y3BmRbvAGNk0NP\nOjia240x0OS5PtCvfOgmpe5LeZqLxs05TOYPO6wCXGf3x1Y9bRd3XCmudX25pzlq\nhJmsfdMZGMcKpMy9Sw6bEjiZpwKBgQDQfoNfhfPCNiaiIAv/6gijRULBFmiLtNa1\nPYjbLeMT8dS+nUHNF7RADWwD7IkCBWc+bFKlXLeYMaczm90MIUrUTwicdiB+QNiq\nLivkMYpv+ISsI9UQ3vJ6R3LlHO+z4idvwlzqhwRXwAP1U6U3JJnM0yNpRLCreEsR\n8HzAFAvI1QKBgChWImUmXJhw6Bof1cDeWx31WgRkED0yAGx2Q/Fl24O/bdvVZtEI\n5DKB6iHBCQq3ERzgPZ6hRqbPDDCx7Cl1xhUbnSTqHvvWe+3Oyk1/D7sK3Hpwi0PV\nvoXtLKLYbeJmVAeNkfh15weWJ/PCWzf/aYOYyOj0caZYCqH101LkPNZtAoGAF2yP\nT/UZvNEeqApXrsnZbJaEeHMPDdskYDponM9b+sqprzy1vtgR7TxUzWAOyIZY4h+D\nbYasLdIuSdMSE6HN6WpzujhfUC/y57PGRJ34Qro2Faz07C9QKMLMOsd0es5Gxfyd\nOdAvgbhV+YMLRdW73dI+4T3RZ4JdVMejDGV0KX0CgYEAoo8ztjBrObv64ShBKr7N\n1b4ZOhfeH7DJCGY+wNh3V+pgFEx6RvrEKdTPg2CUOj/B2f2BhhMXntpylmflADgq\nSTErQ3GyAqF/cW9Ooys4LwIP3+5U5kH2yyhPhTMlhXpwTVInCgLl2uouBTY/x6F/\nHuTCZFelcJ0jq2QltAG5Wzk=\n-----END PRIVATE KEY-----\n"
+              }
+            ]
+          }
+        ],
+        "result": "correct flow session0"
+      }
+    }
+  ]
+}

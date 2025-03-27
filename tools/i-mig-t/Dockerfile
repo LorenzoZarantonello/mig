@@ -36,4 +36,4 @@ COPY ./mig-t-beta-jar-with-dependencies.jar /root/
 COPY ./config/mig-t/config.json /opt/BurpSuiteCommunity/
 
 # Start configuration
-CMD ["./opt/BurpSuiteCommunity/BurpSuiteCommunity", "--user-config-file=user-options.json", "--config-file=project-options.json"]
+CMD /opt/BurpSuiteCommunity/BurpSuiteCommunity --user-config-file=/opt/BurpSuiteCommunity/user-options.json --config-file=/opt/BurpSuiteCommunity/project-options.json && tail -f /dev/null

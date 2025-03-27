@@ -1,0 +1,33 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the OP correctly sign the Access Token",
+        "description": "Tokens issued by an OP must have the structure of JWT Tokens. In particular, this structure is composed by three base64url encoded strings separated by dots, namely the header, payload and signature. The signature is made using the OP's private key, in such a way to be decrypted using its public key. In this test a normal flow is performed and the obtained Access Token is analyzed. In order to test if the OP correctly signed the signature part of the JWT, the access token is passed to a signature verifier correctly configured",
+        "type": "passive",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "message type": "Token response",
+            "decode operations": [
+              {
+                "from": "body",
+                "decode regex": "(?<=\"access_token\": \")[^\"]+",
+                "type": "jwt",
+                "jwt check sig": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCsmhJi/Wy3CVsz\nXW1H1JgYgm7OqUl7Zu/Y3fmg9FvBX96mM1a8YbZmoSPndgUwLwAxk0WG4tr8s3Cv\nWQtUT6NdB7zGOIuF7sOAx/U6dLOr3IARdWjX0E8HCSAl7aOn0ciAz+d9sixRtJKQ\nUAzYIq8ZvQGTYa++pdnXY/5+ltXID2EhCvqs1OqcIbHb6/ihWIYbi7/eJPDsPVm8\ntaauZk5oqcMCobcwlJ1D7aCBD4CJqGDjyyL0L0P8mCcFX20nZ4JLnxkLqRUbmx+0\nSVBV0fp7bqbPjrhNmPlCALBkJOwBB8i8GhdJ0IrGme+wV+tqPPir0GJcCvLEg6Xl\n8uYIVU2HAgMBAAECggEAElMxTI03c59srWFn7s5lb4S5mvtiL9XX9SBsFmibLUau\nbtrYhJujL/Y/x51CI8F5tcm7Af0n3th2SEed6k+iOohNxIXQWmHlI9EW+iPVx5Nb\njX73qKIXIdoYLa6zR2gAb5yjKTc3eV1Aik3Vb0UPbh4hArLGY+lb3YBiTrJY9Cpx\nFpZ1m8Q+KiTpt3EowutwWX1Awn5ZOhfQnEzzc+VKthmaLSt6UFUCz0U/DOnCWT37\nl8uOoBxZ3iABsvq/wt8AlH3ErrpjIcfRYZCx5MXeNCgPfj49YGY+bPO6LC+lQMQ/\nCe/7Q8uSystQ+Rju7ikT4vDEtgIChog1nwcdDhM+MQKBgQDiFPITEbO3WBryKxO/\nlU47HfhRkjO6tYC2t6kD+xracfKMYbtQLjXRq3YDYqCzo7crGdNTUhHZ+cDRobnT\n3vb1n/a11OuaxENP8TOhvfMj1UAR79SMfHC000zrs7EKH4wkIOztnAIM4qQ5gMHV\nCOavdk+R/f7LUwQdGrDqP5bL5QKBgQDDcV2y6UghAKgysKpMeGwv4JkpSKnrNxED\nHd0JGUFZfuim480I5t/k0xym036AQpKfnIYubBFrr58x9Xl+lfgviAe1rwLfg3Vs\nX00vPQCmvq0DKmzZFa2lObdCTQwAegqyukPbLDGWme4RRKKFrFG41fdx20L0bfBo\nOWLyP3+U+wKBgQDO7sEMNz256YjwdAFlcHHkpm/tqdZzZUJk/AJVxHc1zuplF+dt\nYn6cZUZlntbc1lMHvmGxeAMi8vlMZ61BgmmlNT+J+1OTm2TJPUs3FjgAamZ0hIKV\n/CjlOirD6vt2+p05THHQouU1ihUrFPFV3wnXPIFkbYnT7S5svUuFfaK3CQKBgCev\nDiJ0waOJ2Z0pR/rs/LKf/Rln2rCa5sZmOupNCXrdjOnOGWS0VEPHJestyGLMoa7s\n/kXQxZzC9SUUvc2ZL+Ke0UnvtjqiG6aclzR/Q3GYB9M7uww9HZwN4wsAT+6M2T0/\nGuYWzB7TNIanFATmX1WThIHGzoqJBCZ1eITNpd8fAoGBAKgL06Ts7ncos305p9Q1\nK0isu/6q9mECrn3hGvXij7lmzrbYrMfQHMUm50paI8+KE/Q7hjOJ9m6x18CCLlcu\nmSWNUQhEiybp2ye2T60aPb2RcDuEf2ulVA2pBB2QxVuG/XOdezKflOTAoGy4h5U9\ncFtqh239aQvlm5QOgWn2hb0U\n-----END PRIVATE KEY-----\n"
+              }
+            ]
+          }
+        ],
+        "result": "correct flow session0"
+      }
+    }
+  ]
+}

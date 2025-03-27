@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from copy import deepcopy
 import sys
 import os
@@ -14,7 +15,7 @@ import argparse #used for args
 """
 
 OUT_DIR_SINGLE = "tests/single/"
-DIR_TEMPLATES = "/testplan-to-mr/input/templates/"
+DIR_TEMPLATES = "../../testplans/spid-cie-oidc/config/testplan-to-mr/templates"
 
 # Specify the input folder and output folder paths for the config
 INPUT_TEST = 'tests'
@@ -276,7 +277,7 @@ class ConfigLoader:
     "Class to handle and parse configuration file, in this case it is used only at the end to personalize the JSONs"
     def config_for_implementation(self):
         # Load JSON config file
-        with open('config_file/config_testplan.json', 'r') as f:
+        with open('../../testplans/spid-cie-oidc/implementations/spid-cie-oidc-django/config/testplan-to-mr/config_testplan.json', 'r') as f:
             substitutions = json.load(f)
         
         processor._create_if_not_exist(OUTPUT_TEST)
@@ -308,9 +309,7 @@ def createTestsfromCsv(entities: list, patterns: str, df_tests: pd.DataFrame):
             # Returns the rows where entity under test is the entity and the type of the column is the wanted type
             filtered = df_tests[((df_tests["Entity under test"] == entity)) 
                                 & (df_tests["Pattern name"] == pattern)]
-
             tests = generator.create_json(filtered, entity)
-
             if tests:
                 session_test.extend(tests)
                 entity_test.extend(tests)     
@@ -337,13 +336,13 @@ def createTestsfromCsv(entities: list, patterns: str, df_tests: pd.DataFrame):
 
 def generate_mr():
     #Returns a dataframe
-    df_tests = pd.read_csv(os.path.join(wd, "input", "testplan.csv"))
+    df_tests = pd.read_csv(os.path.join(wd, "..", "..", "testplans", "spid-cie-oidc", "testplan.csv"))
 
     # Process each row and expand the DataFrame
     expanded_rows = []
     for _, row in df_tests.iterrows():
         expanded_rows.extend(generator.process_row(row))
-
+    
     # Create a new DataFrame from the processed rows
     df_tests = pd.DataFrame(expanded_rows)
 

@@ -1,0 +1,65 @@
+{
+  "test suite": {
+    "name": "Single test",
+    "description": "One test only",
+    "filter messages": true
+  },
+  "tests": [
+    {
+      "test": {
+        "name": "Does the OP refuse Authentication Requests with a wrong iat parameter",
+        "description": "In this test an authorization request with the iat parameter in the JWT set after the current time is sent and the response analyzed.",
+        "type": "active",
+        "sessions": [
+          "session0"
+        ],
+        "operations": [
+          {
+            "session": "session0",
+            "action": "start"
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Authentication request",
+            "decode operations": [
+              {
+                "from": "url",
+                "decode param": "request",
+                "type": "jwt",
+                "edits": [
+                  {
+                    "jwt from": "payload",
+                    "jwt edit": "$.iat",
+                    "value": "1681723540"
+                  },
+                  {
+                    "jwt sign": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDpIOSxrrgiMGTs\nc1ALvHkL2cwBEZpqd9pSbfALZa6XAb/xrlojLgITBc3YsQ2QLLKk4OpZlxMDALNa\nyKKFU32QNwSztQ275fVaiQrbnYPv8NFj4VcjwAHc/QLFOeCzST46NyZvGpVbZTwb\nnqskWngb8JgDi/MGgA//myQUG37hrmVgmUF8naAmUTS+Hj/jqjI25RP2SYpq5Hue\nlVIeMFRLFjIMQvOho+a9HtKRfiwl7Qwrf0cRLqziej0bsGtounvl47ARCYeASERJ\naxxI5/8KYLkAufNYncVwWHGCy4yR2OhTtsfT3Lyl0qzriRHbOfGz7Ihas8VbyEkq\nfJJzZ+TzAgMBAAECggEANpw19klvaNLdUWZRwe4MjPIgD8AH5BjfU5/dM05Gb6lB\nRWQKSWNlqP8bET+oZbWSw3zMaOAy2+k2GnYVXBYKu9WnjFFFPlbH+sVPfdKQLYzE\nABmxR/aaeSHrnDfKozTtFsYEgtI/WoGEaxPoE0P+Ds11Tp9h9ovZM48sDGnEdyjo\npnLPEZBR6VinP/yF1kfDg0kcIPmM1ZchIqJrnQpoKWeVTXtFFGrVqOAYmm4xBfP4\nU8TEimbeJJuYkJ9gLNnRDg/FC+ZPUiBIXigWZsEeJyevymP+NH4lq3osLgFOq0sq\nPxS3zkDwx9tWfT5UyqrCCortiQd2dxKzxZlEEvlQAQKBgQD7Ulx1xPYV3Bq+Y+q1\n84QoVQYEz2GG/CBfsrILCXy2at6wlDPyk0OQgsx4ol/xkINVTu/j+LgL8/yh7jV/\nb9IOy/0AhiHT3O7+1Cwwx0f+Wo3HRg/xi/bk3ko7GdI4E7zftKJ4VnbGRuiVdchX\ntYget0WLIA4w5JaURMQ7ok278wKBgQDtd9W3gCtIwuZG+9KXXXIMXbm3VpHfKVSb\nBmAsAlM2jvqP7OjxDZPLsZ8IhCYs6E5lOTCqetubAQEwQGyiZZkWH+P3QIszKfVx\nxhSOJMjgIck5MswDythVZ4CtiSp6TWMLhND17U+RGs9wS+rZNqTwYWwGGeE4LN6M\nmswOCqRzAQKBgE63kkw039si8KF3jDlnR5qWXuc8yVBNQhqXTtrUIuLEAHIQSWEO\nLRhjT4XtXd28pNYgflTKP2NHDXbutITw0jteOyVh3dCNH7JjZF/22x7Y4BVtZWsD\nqtYupdNzF/wGep8a5dSJSHR8GzdNB+4o5rSwNLEJ3kgEIQHZtBj1kiFvAoGBALpd\n9CLBujauj19iP1KACgPeguR6Up1bqITKKiwf3wLQj6DpA6A7UaTpT7C1VeikoPIc\nQi9poHQ0A6TEyv1g0xZkDNt9kkGjSnfyRyuPfv84RN5ZGXhYeBP+2SRYpDe8CGF/\n6Sc5CdsNuYOecT/r/OKS8t6O7QzTWg3rZv4WKB4BAoGAZuGvxQjflWRjfKbqpz2q\n9uHwzMS3iYjzlsWaiEk3DYRt+BsZVM77nOBSjpd7ZaEJUJjooWglRpK67BMHOrzZ\nukh2lp+6wAg3nXND4DXOae6PlhgpvsbgMKAQHwcNzcSZ4wqHIiH7mFX5sGcrs9Ul\n2sjDsDEOoAEp046jUXu/FwU=\n-----END PRIVATE KEY-----\n"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "action": "intercept",
+            "from session": "session0",
+            "then": "forward",
+            "message type": "Authentication error response",
+            "checks": [
+              {
+                "in": "head",
+                "check regex": "HTTP/?\\d?\\.?\\d?\\s302"
+              },
+              {
+                "in": "head",
+                "check": "invalid_request"
+              }
+            ]
+          }
+        ],
+        "result": "assert_only"
+      }
+    }
+  ]
+}
