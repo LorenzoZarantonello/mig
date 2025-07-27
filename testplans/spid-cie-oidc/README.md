@@ -22,14 +22,12 @@ This repository contains a *csv* file titled `testplan.csv` that encompasses all
 - *AA/SA/TA/OP/RP*:
   	- First column group: contains the value 1 if, in the record, the specified entity is under test; contains 0 otherwise.
   	- Second column group: some tests require additional entity specification (e.g., test #327 simulates an entity statement request involving one of the five 	entities). This column group contains the value 1 if, in the record, the specified entity is taken into consideration; contains 0 otherwise.
-
 - *Input for generated MR: message to handle / Input for generated MR: Oracle*: Contains the sorted variables to populate the JSON file. The first is used for          intercept operations, and the second is used for validation
 - *Profile*: specify the OIDC profile considered. It can be either OIDC Core or OIDC Federation.
 - *FED Case/ IT Case* (IT: Spid-cie-oidc Italia, FED: OIDC federation) :
 	- M: Mandatory
   	- C: Conditional
   	- NS: Not Specified
-- *Related to*: specifies a preliminary test whose result strongly affects the outcome of the test under consideration (e.g., the test "ALL-Entity Configuration       response-HEAD-federation_metadata-presence" (row 2) affects the test "ALL-Entity Configuration response-HEAD-federation_metadata-value" (row 5))
   
 
 ### Test Documentation
